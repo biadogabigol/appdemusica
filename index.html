@@ -1,230 +1,239 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonora - Seu App de Música</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        darkBg: '#0F1016',
-                        cardBg: '#1A1C26',
-                        neonPurple: '#9333EA',
-                        neonCyan: '#06B6D4'
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-darkBg text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- Cabeçalho Minimalista -->
-    <header class="border-b border-slate-800/80 bg-darkBg/90 sticky top-0 z-50 backdrop-blur-md">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-xl bg-neonPurple flex items-center justify-center text-white shadow-lg shadow-neonPurple/30">
-                    <i class="fa-solid fa-music text-lg"></i>
-                </div>
-                <span class="font-bold text-xl tracking-wide text-white">Sonora</span>
-            </div>
-            <a href="#download" class="px-4 py-2 rounded-lg bg-neonPurple hover:bg-purple-600 text-white font-medium text-sm transition-all">
-                Baixar App
-            </a>
-        </div>
-    </header>
-
-    <main class="max-w-5xl mx-auto px-6 py-12 space-y-16">
-        
-        <!-- Hero Section -->
-        <section class="text-center space-y-6 pt-6">
-            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
-                Sinta cada nota do seu som com o <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonPurple to-neonCyan">Sonora</span>
-            </h1>
-            <p class="text-slate-400 text-lg max-w-2xl mx-auto font-normal">
-                Transmissão em alta fidelidade, playlists personalizadas com inteligência e escuta offline em um aplicativo leve e intuitivo.
-            </p>
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <a href="#download" class="px-6 py-3 rounded-xl bg-gradient-to-r from-neonPurple to-purple-700 hover:opacity-90 text-white font-semibold text-base transition-all shadow-lg shadow-neonPurple/25">
-                    Baixar App Grátis
-                </a>
-                <a href="#demo" class="px-6 py-3 rounded-xl bg-cardBg hover:bg-slate-800 border border-slate-700/80 text-white font-semibold text-base transition-all">
-                    Ouvir Demonstração
-                </a>
-            </div>
-        </section>
-
-        <!-- Player de Áudio Demonstrativo Simples -->
-        <section id="demo" class="bg-cardBg border border-slate-800 rounded-2xl p-6 max-w-xl mx-auto shadow-xl">
-            <div class="flex items-center gap-4">
-                <div class="w-16 h-16 rounded-xl bg-slate-800 flex-shrink-0 overflow-hidden relative border border-slate-700">
-                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=200&q=80" alt="Capa" class="w-full h-full object-cover">
-                </div>
-                <div class="flex-1 min-w-0">
-                    <h3 class="font-bold text-white text-base truncate">Midnight Rhythm</h3>
-                    <p class="text-slate-400 text-sm truncate">Sonora Studio Session</p>
-                    
-                    <!-- Barra de Progresso -->
-                    <div class="w-full bg-slate-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                        <div id="progress-bar" class="bg-gradient-to-r from-neonPurple to-neonCyan h-full w-0 transition-all duration-300"></div>
-                    </div>
-                </div>
-                <button id="play-btn" class="w-12 h-12 rounded-full bg-neonPurple hover:bg-purple-600 text-white flex items-center justify-center text-lg flex-shrink-0 transition-transform active:scale-95 shadow-md shadow-neonPurple/30">
-                    <i class="fa-solid fa-play ml-0.5"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- 3 Recursos Principais -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-cardBg border border-slate-800/80 rounded-2xl p-6 hover:border-neonPurple/40 transition-colors">
-                <div class="w-10 h-10 rounded-xl bg-purple-900/30 text-neonPurple flex items-center justify-center mb-4 text-xl">
-                    <i class="fa-solid fa-sliders"></i>
-                </div>
-                <h3 class="font-bold text-white text-lg mb-2">Som Hi-Fi</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Áudio de alta qualidade sem perdas (Lossless) para você ouvir cada detalhe da música.
-                </p>
-            </div>
-
-            <div class="bg-cardBg border border-slate-800/80 rounded-2xl p-6 hover:border-neonPurple/40 transition-colors">
-                <div class="w-10 h-10 rounded-xl bg-purple-900/30 text-neonPurple flex items-center justify-center mb-4 text-xl">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-                <h3 class="font-bold text-white text-lg mb-2">Playlists Inteligentes</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Recomendações diárias geradas de acordo com o seu gosto musical e momento do dia.
-                </p>
-            </div>
-
-            <div class="bg-cardBg border border-slate-800/80 rounded-2xl p-6 hover:border-neonPurple/40 transition-colors">
-                <div class="w-10 h-10 rounded-xl bg-purple-900/30 text-neonPurple flex items-center justify-center mb-4 text-xl">
-                    <i class="fa-solid fa-wifi"></i>
-                </div>
-                <h3 class="font-bold text-white text-lg mb-2">Modo Offline</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Baixe suas faixas favoritas para ouvir em qualquer lugar, mesmo sem conexão à internet.
-                </p>
-            </div>
-        </section>
-
-        <!-- Chamada para Download -->
-        <section id="download" class="text-center bg-gradient-to-b from-cardBg to-darkBg border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-6">
-            <h2 class="text-2xl sm:text-3xl font-bold text-white">Disponível em todas as plataformas</h2>
-            <p class="text-slate-400 text-sm max-w-md mx-auto">
-                Baixe agora o Sonora para Android e iOS ou ouça diretamente pelo seu navegador.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4 pt-2">
-                <button class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-neonPurple text-white text-sm flex items-center gap-2 transition-all">
-                    <i class="fa-brands fa-apple text-lg"></i> App Store
-                </button>
-                <button class="px-5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-neonPurple text-white text-sm flex items-center gap-2 transition-all">
-                    <i class="fa-brands fa-google-play text-lg"></i> Google Play
-                </button>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Rodapé Simples -->
-    <footer class="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500">
-        <div class="max-w-5xl mx-auto px-6 space-y-3">
-            <div class="flex justify-center gap-6 text-slate-400 font-medium">
-                <a href="#" class="hover:text-white transition-colors">Sobre</a>
-                <a href="#" class="hover:text-white transition-colors">Termos</a>
-                <a href="#" class="hover:text-white transition-colors">Privacidade</a>
-                <a href="https://github.com" target="_blank" class="hover:text-white transition-colors">GitHub</a>
-            </div>
-            <p>&copy; 2026 Sonora. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Lógica do Player Simplificado -->
-    <script>
-        const playBtn = document.getElementById('play-btn');
-        const progressBar = document.getElementById('progress-bar');
-        let isPlaying = false;
-        let progress = 0;
-        let timer = null;
-
-        playBtn.addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            if (isPlaying) {
-                playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                timer = setInterval(() => {
-                    progress = (progress + 2) % 100;
-                    progressBar.style.width = progress + '%';
-                }, 300);
-            } else {
-                playBtn.innerHTML = '<i class="fa-solid fa-play ml-0.5"></i>';
-                clearInterval(timer);
-            }
-        });
-    </script>
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Nomes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonora - Sua Música</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            text-align: center;
-            padding: 40px;
-            color: white;
-        }
+<script>
+tailwind.config = {
+theme: {
+extend: {
+fontFamily: { sans: ['Inter','sans-serif'] },
+colors: {
+darkBg:'#0F1016',
+cardBg:'#1A1C26',
+neonPurple:'#9333EA',
+neonCyan:'#06B6D4'
+}
+}
+}
+}
+</script>
 
-        h1 {
-            font-size: 32px;
-        }
-
-        .container {
-            background: white;
-            color: #333;
-            max-width: 400px;
-            margin: 30px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .nome {
-            background: #eeeaff;
-            padding: 15px;
-            margin: 12px 0;
-            border-radius: 10px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-    </style>
+<style>
+html { scroll-behavior:smooth; }
+body { background:#0F1016; }
+.gradient {
+background:linear-gradient(90deg,#A855F7,#06B6D4);
+-webkit-background-clip:text;
+color:transparent;
+}
+.card { transition:.3s; }
+.card:hover { transform:translateY(-7px); border-color:#9333EA; }
+.glow { box-shadow:0 0 30px rgba(147,51,234,.2); }
+</style>
 </head>
 
-<body>
+<body class="text-white font-sans">
 
-    <h1>Lista de Nomes</h1>
+<header class="sticky top-0 z-50 bg-[#151620]/95 backdrop-blur border-b border-slate-800">
+<nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+<a href="#inicio" class="text-2xl font-extrabold">
+<i class="fa-solid fa-music text-purple-500"></i> Sonora.
+</a>
+<div class="hidden md:flex gap-6 text-slate-300">
+<a href="#inicio">Início</a>
+<a href="#recursos">Recursos</a>
+<a href="#player">Player</a>
+<a href="#equipe">Equipe</a>
+</div>
+<a href="#download" class="bg-purple-600 px-5 py-3 rounded-xl font-bold">Baixar App</a>
+</nav>
+</header>
 
-    <div class="container">
-        <div class="nome">Ana Biatriz</div>
-        <div class="nome">Ângelo José</div>
-        <div class="nome">Dayvid Gabriel</div>
-        <div class="nome">Deyvila Victória</div>
-    </div>
+<main>
+
+<section id="inicio" class="max-w-7xl mx-auto px-6 py-24 text-center">
+<span class="text-purple-400 uppercase text-sm font-bold">O futuro da música</span>
+<h1 class="text-5xl md:text-7xl font-extrabold leading-tight mt-5">
+Sua música.<br>Seu momento.<br>
+<span class="gradient">Seu Sonora.</span>
+</h1>
+<p class="text-slate-400 text-lg max-w-2xl mx-auto mt-7">
+Descubra novas músicas, crie playlists incríveis e aproveite uma experiência musical feita para você.
+</p>
+<div class="flex flex-wrap justify-center gap-4 mt-9">
+<a href="#download" class="bg-purple-600 px-8 py-4 rounded-xl font-bold glow">Começar agora</a>
+<a href="#player" class="border border-slate-700 px-8 py-4 rounded-xl font-bold">Conhecer o player</a>
+</div>
+<img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=85" class="w-full max-w-3xl h-80 object-cover rounded-3xl mx-auto mt-16" alt="Música">
+</section>
+
+<section id="recursos" class="bg-[#14151E] py-24">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-14">
+<h2 class="text-4xl font-extrabold">Uma experiência completa</h2>
+<p class="text-slate-400 mt-3">Tudo que você precisa para aproveitar suas músicas.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-7">
+<div class="card bg-cardBg border border-slate-800 p-8 rounded-2xl">
+<i class="fa-solid fa-headphones text-4xl text-purple-400"></i>
+<h3 class="text-xl font-bold mt-5">Som Hi-Fi</h3>
+<p class="text-slate-400 mt-3">Uma experiência de áudio de alta qualidade para aproveitar cada detalhe.</p>
+</div>
+<div class="card bg-cardBg border border-slate-800 p-8 rounded-2xl">
+<i class="fa-solid fa-wand-magic-sparkles text-4xl text-cyan-400"></i>
+<h3 class="text-xl font-bold mt-5">Playlists inteligentes</h3>
+<p class="text-slate-400 mt-3">Descubra sugestões musicais e organize suas músicas favoritas.</p>
+</div>
+<div class="card bg-cardBg border border-slate-800 p-8 rounded-2xl">
+<i class="fa-solid fa-cloud-arrow-down text-4xl text-green-400"></i>
+<h3 class="text-xl font-bold mt-5">Modo Offline</h3>
+<p class="text-slate-400 mt-3">Uma proposta para acessar suas músicas favoritas sem internet.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="player" class="py-24">
+<div class="max-w-3xl mx-auto px-6 text-center">
+<h2 class="text-4xl font-extrabold mb-10">Player Sonora</h2>
+<div class="bg-cardBg border border-slate-700 rounded-3xl p-8 glow">
+<img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400" class="w-40 h-40 rounded-2xl object-cover mx-auto" alt="Capa musical">
+<h3 class="text-2xl font-bold mt-5">Midnight Rhythm</h3>
+<p class="text-slate-400 mt-2">Sonora Studio Session</p>
+<audio id="audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" preload="metadata"></audio>
+<div class="flex justify-center items-center gap-5 mt-7">
+<button id="play" class="bg-purple-600 w-14 h-14 rounded-full text-xl"><i class="fa-solid fa-play"></i></button>
+<span id="status" class="text-slate-400 text-sm">Pronto para reproduzir</span>
+</div>
+<div class="flex justify-between text-xs text-slate-400 mt-6">
+<span id="current">00:00</span><span id="duration">00:00</span>
+</div>
+<input type="range" id="seek" min="0" max="100" value="0" class="w-full accent-purple-500 mt-2">
+</div>
+</div>
+</section>
+
+<section id="equipe" class="bg-[#14151E] py-24">
+<div class="max-w-5xl mx-auto px-6">
+<div class="text-center mb-12">
+<h2 class="text-4xl font-extrabold">Nossa equipe</h2>
+<p class="text-slate-400 mt-3">Conheça os integrantes do projeto Sonora.</p>
+</div>
+<div class="grid sm:grid-cols-2 gap-6">
+<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
+<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
+<h3 class="font-bold text-xl mt-4">Ana Biatriz</h3>
+<p class="text-slate-400 text-sm mt-2">Integrante do projeto</p>
+</div>
+<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
+<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
+<h3 class="font-bold text-xl mt-4">Ângelo José</h3>
+<p class="text-slate-400 text-sm mt-2">Integrante do projeto</p>
+</div>
+<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
+<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
+<h3 class="font-bold text-xl mt-4">Dayvid Gabriel</h3>
+<p class="text-slate-400 text-sm mt-2">Integrante do projeto</p>
+</div>
+<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
+<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
+<h3 class="font-bold text-xl mt-4">Deyvila Victória</h3>
+<p class="text-slate-400 text-sm mt-2">Integrante do projeto</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="download" class="py-24">
+<div class="max-w-5xl mx-auto px-6">
+<div class="bg-gradient-to-r from-purple-900/70 to-cyan-900/50 border border-purple-500/30 rounded-3xl p-12 text-center glow">
+<i class="fa-solid fa-mobile-screen-button text-5xl text-purple-300"></i>
+<h2 class="text-3xl md:text-4xl font-extrabold mt-6">A música não pode parar!</h2>
+<p class="text-slate-300 mt-5">Conheça a proposta Sonora e acompanhe as novidades do projeto.</p>
+<div class="flex justify-center flex-wrap gap-4 mt-8">
+<button onclick="alert('Aplicativo ainda não publicado na App Store.')" class="bg-black border border-white/20 px-6 py-4 rounded-xl"><i class="fa-brands fa-apple mr-2"></i>App Store</button>
+<button onclick="alert('Aplicativo ainda não publicado na Google Play.')" class="bg-black border border-white/20 px-6 py-4 rounded-xl"><i class="fa-brands fa-google-play mr-2"></i>Google Play</button>
+</div>
+<p class="text-xs text-slate-400 mt-6">Downloads disponíveis após publicação oficial.</p>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="border-t border-slate-800 bg-[#0B0C11] py-10 text-center">
+<div class="text-2xl font-extrabold"><i class="fa-solid fa-music text-purple-500"></i> Sonora.</div>
+<p class="text-slate-400 mt-4">Sua música, sua conexão, seu momento.</p>
+<p class="text-slate-600 text-xs mt-6">© 2026 Sonora. Projeto demonstrativo.</p>
+</footer>
+
+<script>
+const audio = document.getElementById('audio');
+const play = document.getElementById('play');
+const seek = document.getElementById('seek');
+
+function formatTime(seconds) {
+if (!Number.isFinite(seconds)) return '00:00';
+return String(Math.floor(seconds/60)).padStart(2,'0') + ':' +
+String(Math.floor(seconds%60)).padStart(2,'0');
+}
+
+play.addEventListener('click', async () => {
+if (audio.paused) {
+try {
+await audio.play();
+} catch(error) {
+document.getElementById('status').textContent = 'Erro ao carregar áudio';
+}
+} else {
+audio.pause();
+}
+});
+
+audio.addEventListener('play', () => {
+play.innerHTML = '<i class="fa-solid fa-pause"></i>';
+document.getElementById('status').textContent = 'Reproduzindo agora';
+});
+
+audio.addEventListener('pause', () => {
+play.innerHTML = '<i class="fa-solid fa-play"></i>';
+document.getElementById('status').textContent = 'Pausado';
+});
+
+audio.addEventListener('loadedmetadata', () => {
+document.getElementById('duration').textContent = formatTime(audio.duration);
+});
+
+audio.addEventListener('timeupdate', () => {
+document.getElementById('current').textContent = formatTime(audio.currentTime);
+if (Number.isFinite(audio.duration)) {
+seek.value = audio.currentTime / audio.duration * 100;
+}
+});
+
+seek.addEventListener('input', () => {
+if (Number.isFinite(audio.duration)) {
+audio.currentTime = seek.value / 100 * audio.duration;
+}
+});
+
+audio.addEventListener('ended', () => {
+play.innerHTML = '<i class="fa-solid fa-play"></i>';
+document.getElementById('status').textContent = 'Música finalizada';
+seek.value = 0;
+});
+
+audio.addEventListener('error', () => {
+document.getElementById('status').textContent = 'Áudio indisponível';
+});
+</script>
 
 </body>
 </html>
