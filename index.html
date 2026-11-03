@@ -1,44 +1,1253 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090914">
+  <title>SONORA — Sua música, seu universo</title>
 
-<!-- EQUIPE -->
-<section id="equipe" class="bg-[#14151E] py-24">
-<div class="max-w-5xl mx-auto px-6">
-<div class="text-center mb-12">
-<h2 class="text-4xl font-extrabold">Nossa equipe</h2>
-<p class="text-slate-400 mt-3">Conheça os integrantes do projeto Sonora.</p>
-</div>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<div class="grid sm:grid-cols-2 gap-6">
+  <style>
+    :root {
+      --bg: #090914;
+      --panel: #141428;
+      --text: #f8f7ff;
+      --muted: #a6a4c3;
+      --pink: #ff4ecd;
+      --purple: #9b5cff;
+      --cyan: #52e5ff;
+      --line: rgba(255,255,255,.1);
+    }
 
-<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
-<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
-<h3 class="font-bold text-xl mt-4">Ana Biatriz</h3>
-<p class="text-purple-400 text-sm mt-2 font-semibold">Diretora Criativa</p>
-</div>
+    * {
+      box-sizing: border-box;
+    }
 
-<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
-<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
-<h3 class="font-bold text-xl mt-4">Ângelo José</h3>
-<p class="text-purple-400 text-sm mt-2 font-semibold">Desenvolvedor</p>
-</div>
+    html {
+      scroll-behavior: smooth;
+    }
 
-<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
-<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
-<h3 class="font-bold text-xl mt-4">Dayvid Gabriel</h3>
-<p class="text-purple-400 text-sm mt-2 font-semibold">Designer</p>
-</div>
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
 
-<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center">
-<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
-<h3 class="font-bold text-xl mt-4">Deyvila Victória</h3>
-<p class="text-purple-400 text-sm mt-2 font-semibold">Marketing</p>
-</div>
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 12% 10%, rgba(155,92,255,.2), transparent 35%),
+        radial-gradient(ellipse at 85% 30%, rgba(255,78,205,.12), transparent 30%),
+        #090914;
+    }
 
-<div class="card bg-cardBg border border-slate-700 rounded-2xl p-8 text-center sm:col-span-2 sm:max-w-md sm:mx-auto w-full">
-<i class="fa-solid fa-user text-purple-400 text-4xl"></i>
-<h3 class="font-bold text-xl mt-4">Expedito Neto</h3>
-<p class="text-purple-400 text-sm mt-2 font-semibold">Gerente de Projetos</p>
-</div>
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-</div>
-</div>
-</section>
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      padding: 30px 18px;
+      border-right: 1px solid var(--line);
+      background: rgba(10,10,25,.8);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 25px;
+      letter-spacing: 1.5px;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
+      box-shadow: 0 0 28px #9b5cff55;
+    }
+
+    .nav-label {
+      color: #74728f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      padding: 0 12px;
+      margin-bottom: 9px;
+    }
+
+    nav {
+      display: grid;
+      gap: 7px;
+    }
+
+    .nav-link {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border-radius: 12px;
+      color: var(--muted);
+      transition: .25s;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: white;
+      background: linear-gradient(90deg, #9b5cff2b, #ff4ecd12);
+    }
+
+    .nav-link.active {
+      box-shadow: inset 3px 0 var(--pink);
+    }
+
+    .nav-link span:first-child {
+      width: 22px;
+      text-align: center;
+      font-size: 17px;
+    }
+
+    .side-card {
+      margin-top: auto;
+      padding: 17px;
+      border: 1px solid #9b5cff44;
+      background: linear-gradient(145deg, #9b5cff20, #ff4ecd0b);
+      border-radius: 18px;
+    }
+
+    .side-card strong {
+      display: block;
+      margin: 8px 0 5px;
+    }
+
+    .side-card p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 13px;
+    }
+
+    .tiny-btn {
+      border: 0;
+      border-radius: 10px;
+      background: white;
+      color: #151020;
+      font-weight: 700;
+      padding: 9px 12px;
+      font-size: 12px;
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px clamp(18px, 4vw, 54px) 125px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: min(420px, 100%);
+      background: #151529;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 15px;
+      color: var(--muted);
+    }
+
+    .search input {
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: white;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+      font-size: 13px;
+      color: #d8d6eb;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      font-weight: 700;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 315px;
+      padding: clamp(26px, 5vw, 52px);
+      border-radius: 28px;
+      background: linear-gradient(112deg, #271448 0%, #24123e 40%, #101b38 100%);
+      border: 1px solid #ffffff12;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 290px;
+      height: 290px;
+      right: 9%;
+      top: -90px;
+      background: radial-gradient(circle, #ff4ecd88, transparent 68%);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .hero::after {
+      width: 250px;
+      height: 250px;
+      right: 0;
+      bottom: -130px;
+      background: radial-gradient(circle, #52e5ff66, transparent 68%);
+      animation: float 9s ease-in-out infinite reverse;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      color: #e6c8ff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font: 700 clamp(36px, 5vw, 58px)/1.02 'Space Grotesk', sans-serif;
+      letter-spacing: -2px;
+      margin: 18px 0;
+    }
+
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #ff8be4, #b89aff, #70eeff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 430px;
+      color: #c7bfdc;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .primary,
+    .secondary {
+      border-radius: 13px;
+      padding: 13px 18px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .primary {
+      background: linear-gradient(100deg, var(--pink), var(--purple));
+      color: white;
+      box-shadow: 0 8px 28px #9b5cff35;
+    }
+
+    .primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px #9b5cff60;
+    }
+
+    .secondary {
+      background: #ffffff0b;
+      border-color: #ffffff26;
+      color: white;
+    }
+
+    .secondary:hover {
+      background: #ffffff16;
+    }
+
+    .hero-art {
+      position: absolute;
+      right: 7%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 230px;
+      height: 230px;
+      display: grid;
+      place-items: center;
+    }
+
+    .vinyl {
+      width: 215px;
+      height: 215px;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle, #161321 0 3px, #262137 4px 5px);
+      box-shadow: 0 20px 50px #0008;
+      display: grid;
+      place-items: center;
+      animation: spin 18s linear infinite;
+    }
+
+    .vinyl::after {
+      content: "";
+      width: 83px;
+      height: 83px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
+      border: 7px solid #20162e;
+      box-shadow: inset 0 0 0 2px #ffffff66;
+    }
+
+    .vinyl-center {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 38px 0 18px;
+    }
+
+    .section-head h2 {
+      font: 700 24px 'Space Grotesk', sans-serif;
+      margin: 0 0 5px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .text-btn {
+      border: 0;
+      background: transparent;
+      color: #d6a6ff;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .track {
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: linear-gradient(145deg, #17172d, #10101f);
+      transition: .25s;
+    }
+
+    .track:hover {
+      transform: translateY(-5px);
+      border-color: #9b5cff80;
+      box-shadow: 0 15px 35px #0003;
+    }
+
+    .cover {
+      aspect-ratio: 1;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 13px;
+    }
+
+    .cover::before {
+      content: "";
+      position: absolute;
+      width: 130%;
+      height: 130%;
+      background: repeating-conic-gradient(from 0deg, transparent 0 12deg, #ffffff0c 13deg 14deg);
+      animation: spin 30s linear infinite;
+    }
+
+    .cover span {
+      font-size: 46px;
+      filter: drop-shadow(0 6px 15px #0005);
+      z-index: 1;
+    }
+
+    .c1 { background: linear-gradient(135deg, #ff4ecd, #7c35ff); }
+    .c2 { background: linear-gradient(135deg, #00b9c8, #3131a5); }
+    .c3 { background: linear-gradient(135deg, #ff8a4c, #c02e71); }
+    .c4 { background: linear-gradient(135deg, #5550c9, #16182e); }
+
+    .track h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .track p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 13px;
+    }
+
+    .track-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 5px 8px;
+      border-radius: 20px;
+      background: #ffffff0d;
+      color: #c9c6df;
+    }
+
+    .play-small {
+      width: 35px;
+      height: 35px;
+      border: 0;
+      border-radius: 50%;
+      background: white;
+      color: #171024;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 24px;
+      color: var(--muted);
+      text-align: center;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature {
+      padding: 21px;
+      border-radius: 18px;
+      background: #141428;
+      border: 1px solid var(--line);
+      transition: .25s;
+    }
+
+    .feature:hover {
+      border-color: #ff4ecd66;
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #ff4ecd28, #9b5cff35);
+      font-size: 21px;
+      margin-bottom: 16px;
+    }
+
+    .feature h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .member {
+      padding: 17px 12px;
+      border-radius: 17px;
+      text-align: center;
+      background: #141428;
+      border: 1px solid var(--line);
+    }
+
+    .member-avatar {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 12px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ff4ecd, #775cff);
+      font: 700 18px 'Space Grotesk', sans-serif;
+    }
+
+    .member h3 {
+      font-size: 13px;
+      margin-bottom: 7px;
+      overflow-wrap: anywhere;
+    }
+
+    .member p {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .note {
+      font-size: 11px;
+      color: #8582a3;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .player {
+      position: fixed;
+      bottom: 0;
+      left: 230px;
+      right: 0;
+      z-index: 5;
+      padding: 12px 24px;
+      background: #10101df2;
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(22px);
+      display: grid;
+      grid-template-columns: minmax(150px, 1fr) auto minmax(150px, 1fr);
+      align-items: center;
+      gap: 18px;
+    }
+
+    .now-playing {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .mini-cover {
+      width: 43px;
+      height: 43px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .now-playing strong {
+      display: block;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .now-playing span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .control {
+      border: 0;
+      background: transparent;
+      color: #dedbed;
+      font-size: 18px;
+    }
+
+    .control.main {
+      width: 39px;
+      height: 39px;
+      border-radius: 50%;
+      background: white;
+      color: #171024;
+      font-size: 15px;
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .progress-wrap input {
+      width: 100%;
+      min-width: 40px;
+      accent-color: var(--pink);
+      cursor: pointer;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 100px;
+      left: 50%;
+      transform: translate(-50%, 15px);
+      background: #27213b;
+      border: 1px solid #ffffff22;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+      z-index: 10;
+      text-align: center;
+      width: max-content;
+      max-width: 90%;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(18px); }
+    }
+
+    @media (max-width: 1100px) {
+      .track-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .hero-art {
+        right: 3%;
+        opacity: .65;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .shell {
+        display: block;
+      }
+
+      aside {
+        position: relative;
+        height: auto;
+        padding: 15px;
+        gap: 15px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        font-size: 21px;
+      }
+
+      .nav-label,
+      .side-card {
+        display: none;
+      }
+
+      nav {
+        display: flex;
+        overflow-x: auto;
+        gap: 5px;
+      }
+
+      .nav-link {
+        flex-shrink: 0;
+        padding: 10px;
+        font-size: 12px;
+      }
+
+      main {
+        padding: 20px 16px 150px;
+      }
+
+      .topbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .profile {
+        align-self: flex-end;
+      }
+
+      .hero {
+        min-height: 350px;
+      }
+
+      .hero-art {
+        right: -65px;
+        top: 25%;
+        opacity: .25;
+      }
+
+      .hero-copy {
+        max-width: 100%;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .player {
+        left: 0;
+        padding: 10px 12px;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+      }
+
+      .player-controls {
+        gap: 8px;
+      }
+
+      .progress-wrap {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      .now-playing {
+        max-width: 200px;
+      }
+
+      .control {
+        font-size: 16px;
+      }
+
+      .control.main {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .track-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .track {
+        display: grid;
+        grid-template-columns: 85px 1fr;
+        gap: 0 12px;
+      }
+
+      .cover {
+        grid-row: span 3;
+        margin-bottom: 0;
+      }
+
+      .track h3 {
+        align-self: end;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <aside>
+      <a class="brand" href="#inicio">
+        <span class="brand-mark">♫</span>
+        SONORA
+      </a>
+
+      <div>
+        <div class="nav-label">Menu principal</div>
+        <nav>
+          <a class="nav-link active" href="#inicio"><span>⌂</span> Início</a>
+          <a class="nav-link" href="#descobrir"><span>♫</span> Descobrir</a>
+          <a class="nav-link" href="#recursos"><span>✧</span> Recursos</a>
+          <a class="nav-link" href="#equipe"><span>♙</span> Nossa equipe</a>
+        </nav>
+      </div>
+
+      <div class="side-card">
+        <span>✦</span>
+        <strong>Seu som, suas regras</strong>
+        <p>Explore novos ritmos e encontre a trilha sonora do seu momento.</p>
+        <a href="#descobrir" class="tiny-btn">Explorar agora ↗</a>
+      </div>
+    </aside>
+
+    <main>
+      <div class="topbar">
+        <label class="search">
+          <span>⌕</span>
+          <input type="search" id="searchInput" placeholder="Buscar músicas e artistas..." aria-label="Buscar músicas e artistas">
+        </label>
+
+        <div class="profile">
+          <div class="avatar">S</div>
+          <span>Olá, music lover!</span>
+        </div>
+      </div>
+
+      <section class="hero" id="inicio">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="pulse-dot"></span>
+            O som do seu universo
+          </div>
+
+          <h1>Sinta a música.<br><em>Viva o momento.</em></h1>
+
+          <p>
+            Descubra novos sons, explore diferentes estilos e dê play na trilha sonora que combina com você. Seu próximo favorito começa aqui.
+          </p>
+
+          <div class="actions">
+            <button class="primary" id="heroPlay">▶ Ouvir amostra</button>
+            <a class="secondary" href="#descobrir">Explorar biblioteca ↗</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="vinyl"></div>
+          <div class="vinyl-center"></div>
+        </div>
+      </section>
+
+      <section id="descobrir">
+        <div class="section-head">
+          <div>
+            <h2>Descubra seu próximo hit</h2>
+            <p>Uma seleção para começar a explorar.</p>
+          </div>
+          <button class="text-btn" id="clearSearch">Ver tudo ↗</button>
+        </div>
+
+        <div class="track-grid" id="trackGrid">
+          <article class="track" data-title="Neon Dreams" data-artist="Sonora Sessions">
+            <div class="cover c1"><span>🌌</span></div>
+            <h3>Neon Dreams</h3>
+            <p>Sonora Sessions</p>
+            <div class="track-bottom">
+              <span class="tag">Eletrônica</span>
+              <button class="play-small" data-play aria-label="Tocar Neon Dreams">▶</button>
+            </div>
+          </article>
+
+          <article class="track" data-title="Ocean Eyes" data-artist="Blue Horizon">
+            <div class="cover c2"><span>🌊</span></div>
+            <h3>Ocean Eyes</h3>
+            <p>Blue Horizon</p>
+            <div class="track-bottom">
+              <span class="tag">Chill</span>
+              <button class="play-small" data-play aria-label="Tocar Ocean Eyes">▶</button>
+            </div>
+          </article>
+
+          <article class="track" data-title="Golden Hour" data-artist="Mira Sol">
+            <div class="cover c3"><span>🌅</span></div>
+            <h3>Golden Hour</h3>
+            <p>Mira Sol</p>
+            <div class="track-bottom">
+              <span class="tag">Indie pop</span>
+              <button class="play-small" data-play aria-label="Tocar Golden Hour">▶</button>
+            </div>
+          </article>
+
+          <article class="track" data-title="Midnight Drive" data-artist="The Afterglow">
+            <div class="cover c4"><span>🌃</span></div>
+            <h3>Midnight Drive</h3>
+            <p>The Afterglow</p>
+            <div class="track-bottom">
+              <span class="tag">Alternativa</span>
+              <button class="play-small" data-play aria-label="Tocar Midnight Drive">▶</button>
+            </div>
+          </article>
+        </div>
+
+        <p class="note">
+          As faixas são exemplos visuais para a demonstração. O player reproduz uma amostra instrumental carregada pela internet.
+        </p>
+      </section>
+
+      <section id="recursos">
+        <div class="section-head">
+          <div>
+            <h2>Feito para quem vive música</h2>
+            <p>Uma ideia de como a experiência Sonora pode funcionar.</p>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-icon">⌕</div>
+            <h3>Busca inteligente</h3>
+            <p>Encontre rapidamente músicas e artistas usando a barra de pesquisa.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">♫</div>
+            <h3>Vários estilos</h3>
+            <p>Explore diferentes gêneros musicais e descubra novos sons para cada momento.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon">▶</div>
+            <h3>Player integrado</h3>
+            <p>Ouça uma amostra de áudio, pause, retome e acompanhe o progresso da reprodução.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="equipe">
+        <div class="section-head">
+          <div>
+            <h2>Quem faz a Sonora</h2>
+            <p>Conheça a equipe por trás do projeto.</p>
+          </div>
+        </div>
+
+        <div class="team-grid">
+          <article class="member">
+            <div class="member-avatar">AB</div>
+            <h3>Ana Biatriz</h3>
+            <p>Design da interface e identidade visual</p>
+          </article>
+
+          <article class="member">
+            <div class="member-avatar">ÂJ</div>
+            <h3>Ângelo José</h3>
+            <p>Estrutura HTML e organização das páginas</p>
+          </article>
+
+          <article class="member">
+            <div class="member-avatar">DG</div>
+            <h3>Dayvid Gabriel Joaquim</h3>
+            <p>Interatividade com JavaScript</p>
+          </article>
+
+          <article class="member">
+            <div class="member-avatar">DV</div>
+            <h3>Deyvila Victória</h3>
+            <p>Pesquisa de recursos e experiência do usuário</p>
+          </article>
+
+          <article class="member">
+            <div class="member-avatar">EN</div>
+            <h3>Expedito Neto</h3>
+            <p>Testes, revisão e integração do projeto</p>
+          </article>
+        </div>
+
+        <p class="note">
+          As funções são sugestões para a apresentação do projeto. Ajustem conforme a divisão real das tarefas da equipe.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <div class="player" aria-label="Player de áudio">
+    <div class="now-playing">
+      <div class="mini-cover">♫</div>
+      <div style="min-width:0">
+        <strong id="nowTitle">Amostra Sonora</strong>
+        <span id="nowArtist">Instrumental de demonstração</span>
+      </div>
+    </div>
+
+    <div class="player-controls">
+      <button class="control" id="restartBtn" aria-label="Reiniciar amostra" title="Reiniciar">↺</button>
+      <button class="control main" id="playBtn" aria-label="Reproduzir" title="Reproduzir">▶</button>
+      <button class="control" id="muteBtn" aria-label="Silenciar" title="Silenciar">🔊</button>
+    </div>
+
+    <div class="progress-wrap">
+      <span id="currentTime">0:00</span>
+      <input id="progress" type="range" min="0" max="100" value="0" aria-label="Progresso da música">
+      <span id="duration">0:00</span>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <audio id="audio" preload="none" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    const progress = document.getElementById('progress');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const nowTitle = document.getElementById('nowTitle');
+    const nowArtist = document.getElementById('nowArtist');
+    const toast = document.getElementById('toast');
+
+    let toastTimer;
+
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds)) return '0:00';
+
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60).toString().padStart(2, '0');
+
+      return `${min}:${sec}`;
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+
+      clearTimeout(toastTimer);
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    async function togglePlay() {
+      if (audio.paused) {
+        try {
+          await audio.play();
+
+          playBtn.textContent = 'Ⅱ';
+          playBtn.setAttribute('aria-label', 'Pausar');
+          document.getElementById('heroPlay').textContent = 'Ⅱ Pausar amostra';
+        } catch (error) {
+          showToast('Não foi possível carregar o áudio. Confira sua conexão e tente novamente.');
+        }
+      } else {
+        audio.pause();
+
+        playBtn.textContent = '▶';
+        playBtn.setAttribute('aria-label', 'Reproduzir');
+        document.getElementById('heroPlay').textContent = '▶ Ouvir amostra';
+      }
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+
+    document.getElementById('heroPlay').addEventListener('click', togglePlay);
+
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      audio.currentTime = 0;
+
+      if (audio.paused) {
+        togglePlay();
+      }
+    });
+
+    document.getElementById('muteBtn').addEventListener('click', () => {
+      audio.muted = !audio.muted;
+
+      document.getElementById('muteBtn').textContent = audio.muted ? '🔇' : '🔊';
+
+      showToast(audio.muted ? 'Áudio silenciado' : 'Som ativado');
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (Number.isFinite(audio.duration)) {
+        progress.value = (audio.currentTime / audio.duration) * 100;
+      }
+
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+      durationEl.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+      playBtn.textContent = '▶';
+      playBtn.setAttribute('aria-label', 'Reproduzir');
+      document.getElementById('heroPlay').textContent = '▶ Ouvir amostra';
+    });
+
+    audio.addEventListener('error', () => {
+      showToast('O áudio não carregou. Verifique sua conexão com a internet.');
+    });
+
+    progress.addEventListener('input', () => {
+      if (Number.isFinite(audio.duration)) {
+        audio.currentTime = (Number(progress.value) / 100) * audio.duration;
+      }
+    });
+
+    document.querySelectorAll('[data-play]').forEach(button => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.track');
+
+        nowTitle.textContent = card.dataset.title;
+        nowArtist.textContent = card.dataset.artist + ' · amostra de demonstração';
+
+        if (audio.paused) {
+          togglePlay();
+        } else {
+          showToast('Amostra de demonstração em reprodução');
+        }
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', event => {
+      const query = event.target.value.trim().toLocaleLowerCase('pt-BR');
+      let visible = 0;
+
+      document.querySelectorAll('.track').forEach(card => {
+        const text = (card.dataset.title + ' ' + card.dataset.artist).toLocaleLowerCase('pt-BR');
+        const match = text.includes(query);
+
+        card.hidden = !match;
+
+        if (match) visible++;
+      });
+
+      let empty = document.querySelector('.empty');
+
+      if (!visible && !empty) {
+        empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = 'Nenhum resultado encontrado. Tente outro nome.';
+
+        document.getElementById('trackGrid').appendChild(empty);
+      } else if (visible && empty) {
+        empty.remove();
+      }
+    });
+
+    document.getElementById('clearSearch').addEventListener('click', () => {
+      document.getElementById('searchInput').value = '';
+
+      document.querySelectorAll('.track').forEach(card => {
+        card.hidden = false;
+      });
+
+      const empty = document.querySelector('.empty');
+
+      if (empty) {
+        empty.remove();
+      }
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelectorAll('.nav-link').forEach(item => {
+          item.classList.remove('active');
+        });
+
+        link.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
