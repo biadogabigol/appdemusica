@@ -982,6 +982,118 @@
         </p>
       </section>
 
+      <!-- NOVA SEÇÃO: ARTISTAS -->
+      <section id="artistas">
+        <div class="section-head">
+          <div>
+            <h2>Artistas em destaque</h2>
+            <p>Encontre seus artistas favoritos.</p>
+          </div>
+        </div>
+
+        <div class="track-grid" id="artistGrid">
+          <article class="track" data-artist-name="Michael Jackson">
+            <div class="cover c1"><span>👑</span></div>
+            <h3>Michael Jackson</h3>
+            <p>Pop · Rei do Pop</p>
+            <div class="track-bottom">
+              <span class="tag">Pop</span>
+              <button class="play-small" data-artist="Michael Jackson" aria-label="Selecionar Michael Jackson">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Beyoncé">
+            <div class="cover c2"><span>✨</span></div>
+            <h3>Beyoncé</h3>
+            <p>Pop · R&B</p>
+            <div class="track-bottom">
+              <span class="tag">R&B</span>
+              <button class="play-small" data-artist="Beyoncé" aria-label="Selecionar Beyoncé">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Taylor Swift">
+            <div class="cover c3"><span>💫</span></div>
+            <h3>Taylor Swift</h3>
+            <p>Pop · Country</p>
+            <div class="track-bottom">
+              <span class="tag">Pop</span>
+              <button class="play-small" data-artist="Taylor Swift" aria-label="Selecionar Taylor Swift">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Bruno Mars">
+            <div class="cover c4"><span>🎤</span></div>
+            <h3>Bruno Mars</h3>
+            <p>Pop · Funk</p>
+            <div class="track-bottom">
+              <span class="tag">Funk</span>
+              <button class="play-small" data-artist="Bruno Mars" aria-label="Selecionar Bruno Mars">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Rihanna">
+            <div class="cover c1"><span>💎</span></div>
+            <h3>Rihanna</h3>
+            <p>Pop · R&B</p>
+            <div class="track-bottom">
+              <span class="tag">R&B</span>
+              <button class="play-small" data-artist="Rihanna" aria-label="Selecionar Rihanna">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Lady Gaga">
+            <div class="cover c2"><span>🎭</span></div>
+            <h3>Lady Gaga</h3>
+            <p>Pop · Dance</p>
+            <div class="track-bottom">
+              <span class="tag">Dance</span>
+              <button class="play-small" data-artist="Lady Gaga" aria-label="Selecionar Lady Gaga">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Justin Bieber">
+            <div class="cover c3"><span>🎧</span></div>
+            <h3>Justin Bieber</h3>
+            <p>Pop · R&B</p>
+            <div class="track-bottom">
+              <span class="tag">Pop</span>
+              <button class="play-small" data-artist="Justin Bieber" aria-label="Selecionar Justin Bieber">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Ariana Grande">
+            <div class="cover c4"><span>🌟</span></div>
+            <h3>Ariana Grande</h3>
+            <p>Pop · R&B</p>
+            <div class="track-bottom">
+              <span class="tag">Pop</span>
+              <button class="play-small" data-artist="Ariana Grande" aria-label="Selecionar Ariana Grande">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Ed Sheeran">
+            <div class="cover c1"><span>🎸</span></div>
+            <h3>Ed Sheeran</h3>
+            <p>Pop · Folk</p>
+            <div class="track-bottom">
+              <span class="tag">Folk</span>
+              <button class="play-small" data-artist="Ed Sheeran" aria-label="Selecionar Ed Sheeran">♪</button>
+            </div>
+          </article>
+
+          <article class="track" data-artist-name="Adele">
+            <div class="cover c2"><span>🎙️</span></div>
+            <h3>Adele</h3>
+            <p>Pop · Soul</p>
+            <div class="track-bottom">
+              <span class="tag">Soul</span>
+              <button class="play-small" data-artist="Adele" aria-label="Selecionar Adele">♪</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section id="recursos">
         <div class="section-head">
           <div>
@@ -1199,44 +1311,94 @@
       });
     });
 
-    document.getElementById('searchInput').addEventListener('input', event => {
-      const query = event.target.value.trim().toLocaleLowerCase('pt-BR');
-      let visible = 0;
+    // Busca inteligente de músicas e artistas, ignorando diferenças de acentos.
+    function normalizeText(text) {
+      return text
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim();
+    }
 
-      document.querySelectorAll('.track').forEach(card => {
-        const text = (card.dataset.title + ' ' + card.dataset.artist).toLocaleLowerCase('pt-BR');
-        const match = text.includes(query);
+    const searchInput = document.getElementById('searchInput');
+    const trackGrid = document.getElementById('trackGrid');
+    const artistGrid = document.getElementById('artistGrid');
 
-        card.hidden = !match;
+    function searchContent() {
+      const query = normalizeText(searchInput.value);
+      let visibleTracks = 0;
+      let visibleArtists = 0;
 
-        if (match) visible++;
+      document.querySelectorAll('#trackGrid .track').forEach(card => {
+        const searchableText = normalizeText(
+          (card.dataset.title || '') + ' ' + (card.dataset.artist || '')
+        );
+
+        const matches = searchableText.includes(query);
+
+        card.hidden = !matches;
+
+        if (matches) {
+          visibleTracks++;
+        }
       });
 
-      let empty = document.querySelector('.empty');
+      document.querySelectorAll('#artistGrid .track').forEach(card => {
+        const artistName = normalizeText(card.dataset.artistName || '');
+        const matches = artistName.includes(query);
 
-      if (!visible && !empty) {
-        empty = document.createElement('div');
-        empty.className = 'empty';
-        empty.textContent = 'Nenhum resultado encontrado. Tente outro nome.';
+        card.hidden = !matches;
 
-        document.getElementById('trackGrid').appendChild(empty);
-      } else if (visible && empty) {
-        empty.remove();
+        if (matches) {
+          visibleArtists++;
+        }
+      });
+
+      document.querySelectorAll('.empty').forEach(message => {
+        message.remove();
+      });
+
+      if (query && visibleTracks === 0) {
+        const message = document.createElement('div');
+        message.className = 'empty';
+        message.textContent = 'Nenhuma música encontrada.';
+        trackGrid.appendChild(message);
       }
-    });
+
+      if (query && visibleArtists === 0) {
+        const message = document.createElement('div');
+        message.className = 'empty';
+        message.textContent = 'Nenhum artista encontrado.';
+        artistGrid.appendChild(message);
+      }
+    }
+
+    searchInput.addEventListener('input', searchContent);
 
     document.getElementById('clearSearch').addEventListener('click', () => {
-      document.getElementById('searchInput').value = '';
+      searchInput.value = '';
 
       document.querySelectorAll('.track').forEach(card => {
         card.hidden = false;
       });
 
-      const empty = document.querySelector('.empty');
+      document.querySelectorAll('.empty').forEach(message => {
+        message.remove();
+      });
+    });
 
-      if (empty) {
-        empty.remove();
-      }
+    // Os botões dos artistas pesquisam o artista escolhido.
+    document.querySelectorAll('[data-artist]').forEach(button => {
+      button.addEventListener('click', () => {
+        const artistName = button.dataset.artist;
+
+        searchInput.value = artistName;
+        searchContent();
+
+        document.getElementById('artistas').scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
     });
 
     document.querySelectorAll('.nav-link').forEach(link => {
